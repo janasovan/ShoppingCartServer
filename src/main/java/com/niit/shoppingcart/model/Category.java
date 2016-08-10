@@ -5,17 +5,21 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 @Entity
 @Table	//(name="Category")		if table name and domain class name is same, then no need to specify name here...
+@Component		//@Component annotation marks a java class as a bean so the component-scanning mechanism of spring can pick it up and pull it into the application context..
 public class Category {
 	/* id, name, description are the  fields of the table */
 	
 	@Id		//id is primary key 
 	private String id;
 	
+	//
 	private String name;
 	
-	@Column(name="desc")
+	@Column(name="desc")	//if column_name from table and variable_name is same then no need to specify name here... 
 	private String description;
 	
 		
