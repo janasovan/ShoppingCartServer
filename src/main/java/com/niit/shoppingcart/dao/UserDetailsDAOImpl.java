@@ -7,21 +7,25 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.niit.shoppingcart.model.Category;
+import com.niit.shoppingcart.model.UserDetails;
 
-@Repository(value = "categoryDAO")		//@Repository annotation is a specialization of the @Component annotation with similar use and functionality...
-public class CategoryDAOImpl implements CategoryDAO{
+@EnableTransactionManagement
+@Repository(value = "userDetailsDAO")		//@Repository annotation is a specialization of the @Component annotation with similar use and functionality...
+public class UserDetailsDAOImpl implements UserDetailsDAO{
 
 	
 	
 	@Autowired		//@Autowired annotation provides more fine-grained control over where and how autowiring should be accomplished..
 					//first we need to create a connection. 
 	private SessionFactory sessionFactory;		//Create a session for making connection...  **ApplicationContextConfiguration.java
-	
-	
-	
+				
+	public UserDetailsDAOImpl() {
+		super();
+	}
+
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
@@ -30,20 +34,16 @@ public class CategoryDAOImpl implements CategoryDAO{
 		this.sessionFactory = sessionFactory;
 	}
 
-	public CategoryDAOImpl() {
-		super();
-	}
-
-	public CategoryDAOImpl(SessionFactory sessionFactory){		//create CategoryDAOImpl construstor taking sessionfactory as parameter..
+	public UserDetailsDAOImpl(SessionFactory sessionFactory){		//create UserDetailsDAOImpl construstor taking sessionfactory as parameter..
 		this.sessionFactory = sessionFactory;
 	}
 	
 	// Declare all CRUD Operations...
 	
 	@Transactional
-	public boolean save(Category category){		//to save record if record does not exist..
+	public boolean save(UserDetails userDetails){		//to save record if record does not exist..
 		try {			//take it on try-catch block so that if current session fails to save or fails to return true then it could return false...
-			sessionFactory.getCurrentSession().save(category);		
+			sessionFactory.getCurrentSession().save(userDetails);		
 			return true;
 		} catch (HibernateException e) {
 			// TODO Auto-generated catch block
@@ -53,9 +53,9 @@ public class CategoryDAOImpl implements CategoryDAO{
 	}
 	
 	@Transactional
-	public boolean update(Category category){	//to update the record that exist..
+	public boolean update(UserDetails userDetails){	//to update the record that exist..
 		try {			//take it on try-catch block so that if current session fails to save or fails to return true then it could return false...
-			sessionFactory.getCurrentSession().update(category);
+			sessionFactory.getCurrentSession().update(userDetails);
 			return true;
 		} catch (HibernateException e) {
 			// TODO Auto-generated catch block
@@ -65,9 +65,9 @@ public class CategoryDAOImpl implements CategoryDAO{
 	}
 	
 	@Transactional
-	public boolean delete(Category category){	//to delete from category..
+	public boolean delete(UserDetails userDetails){	//to delete from userDetails..
 		try {
-			sessionFactory.getCurrentSession().delete(category);
+			sessionFactory.getCurrentSession().delete(userDetails);
 			return true;
 		} catch (HibernateException e) {
 			// TODO Auto-generated catch block
@@ -77,13 +77,13 @@ public class CategoryDAOImpl implements CategoryDAO{
 	}
 	
 	@Transactional
-	public Category get(String id){
+	public UserDetails get(String id){
 		
 			//we need to declare the name i.e. hql (hibernate query language) to get response from the query related to db..
-		String hql = " from Category where id = " + "'"	+ id + "'";	//  select * from Category where id = '___'
+		String hql = " from UserDetails where id = " + "'"	+ id + "'";	//  select * from UserDetails where id = '___'
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		List<Category> list = query.list();
+		List<UserDetails> list = query.list();
 		
 		if(list==null){
 			return null;
@@ -94,9 +94,9 @@ public class CategoryDAOImpl implements CategoryDAO{
 	}
 	
 	@Transactional
-	public List<Category> list() {
+	public List<UserDetails> list() {
 		
-		String hql = " from Category ";
+		String hql = " from UserDetails ";
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		return query.list();

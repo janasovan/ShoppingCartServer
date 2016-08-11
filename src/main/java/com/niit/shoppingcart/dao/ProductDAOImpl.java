@@ -9,19 +9,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.niit.shoppingcart.model.Category;
+import com.niit.shoppingcart.model.Product;
 
-@Repository(value = "categoryDAO")		//@Repository annotation is a specialization of the @Component annotation with similar use and functionality...
-public class CategoryDAOImpl implements CategoryDAO{
+@Repository(value = "productDAO")		//@Repository annotation is a specialization of the @Component annotation with similar use and functionality...
+public class ProductDAOImpl implements ProductDAO{
 
 	
 	
 	@Autowired		//@Autowired annotation provides more fine-grained control over where and how autowiring should be accomplished..
 					//first we need to create a connection. 
 	private SessionFactory sessionFactory;		//Create a session for making connection...  **ApplicationContextConfiguration.java
-	
-	
-	
+				
+	public ProductDAOImpl() {
+		super();
+	}
+
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
@@ -30,20 +32,16 @@ public class CategoryDAOImpl implements CategoryDAO{
 		this.sessionFactory = sessionFactory;
 	}
 
-	public CategoryDAOImpl() {
-		super();
-	}
-
-	public CategoryDAOImpl(SessionFactory sessionFactory){		//create CategoryDAOImpl construstor taking sessionfactory as parameter..
+	public ProductDAOImpl(SessionFactory sessionFactory){		//create ProductDAOImpl construstor taking sessionfactory as parameter..
 		this.sessionFactory = sessionFactory;
 	}
 	
 	// Declare all CRUD Operations...
 	
 	@Transactional
-	public boolean save(Category category){		//to save record if record does not exist..
+	public boolean save(Product product){		//to save record if record does not exist..
 		try {			//take it on try-catch block so that if current session fails to save or fails to return true then it could return false...
-			sessionFactory.getCurrentSession().save(category);		
+			sessionFactory.getCurrentSession().save(product);		
 			return true;
 		} catch (HibernateException e) {
 			// TODO Auto-generated catch block
@@ -53,9 +51,9 @@ public class CategoryDAOImpl implements CategoryDAO{
 	}
 	
 	@Transactional
-	public boolean update(Category category){	//to update the record that exist..
+	public boolean update(Product product){	//to update the record that exist..
 		try {			//take it on try-catch block so that if current session fails to save or fails to return true then it could return false...
-			sessionFactory.getCurrentSession().update(category);
+			sessionFactory.getCurrentSession().update(product);
 			return true;
 		} catch (HibernateException e) {
 			// TODO Auto-generated catch block
@@ -65,9 +63,9 @@ public class CategoryDAOImpl implements CategoryDAO{
 	}
 	
 	@Transactional
-	public boolean delete(Category category){	//to delete from category..
+	public boolean delete(Product product){	//to delete from product..
 		try {
-			sessionFactory.getCurrentSession().delete(category);
+			sessionFactory.getCurrentSession().delete(product);
 			return true;
 		} catch (HibernateException e) {
 			// TODO Auto-generated catch block
@@ -77,13 +75,13 @@ public class CategoryDAOImpl implements CategoryDAO{
 	}
 	
 	@Transactional
-	public Category get(String id){
+	public Product get(String id){
 		
 			//we need to declare the name i.e. hql (hibernate query language) to get response from the query related to db..
-		String hql = " from Category where id = " + "'"	+ id + "'";	//  select * from Category where id = '___'
+		String hql = " from Product where id = " + "'"	+ id + "'";	//  select * from Product where id = '___'
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		List<Category> list = query.list();
+		List<Product> list = query.list();
 		
 		if(list==null){
 			return null;
@@ -94,9 +92,9 @@ public class CategoryDAOImpl implements CategoryDAO{
 	}
 	
 	@Transactional
-	public List<Category> list() {
+	public List<Product> list() {
 		
-		String hql = " from Category ";
+		String hql = " from Product ";
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		return query.list();

@@ -25,33 +25,34 @@ public class ApplicationContextConfiguration {
 	@Bean(name="dataSource")
 	public DataSource getDataSource(){
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		
-		dataSource.setDriverClassName("org.h2.Driver");
-		dataSource.setUrl("jdbc:h2:tcp://localhost/~/niitdb");
-		dataSource.setUsername("sa");
-		dataSource.setPassword("sa");
-		return dataSource;                                    //h2 db has n nums of server, it has n memory...
+				/*--- Database connection settings ---*/
+		dataSource.setDriverClassName("org.h2.Driver");		//specify the driver...
+		dataSource.setUrl("jdbc:h2:tcp://localhost/~/niitdb");		//specify the db_url...
+		dataSource.setUsername("sa");		//specify the db_username...
+		dataSource.setPassword("sa");		//specify the db_password...
+		return dataSource;                                    //we are using h2 db, as it is n memory database...
 	}
 	private Properties getHibernateProperties() {
 		Properties properties = new Properties();
-		properties.put("hibernate.show_sql", "true");
-		properties.put("hibernate.dialect", "org.hibernate.dialect.H2LDialect");
-		properties.put("hibernate.dbm2ddl.auto", "update");
+		properties.put("hibernate.show_sql", "true");		//echo all excuted SQL to stdout...
+		properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");		//specify which database server you are using...
+		properties.put("hibernate.dbm2ddl.auto", "update");		//hbm2ddl.auto property is a property that will define exactly which type of operation you want. It could be create, create-drop, update and validate...
 		return properties;
 		}
 	
 
-	@Autowired
-	@Bean(name = "sessionFactory")
+	@Autowired		//@Autowired annotation provides more fine-grained control over where and how autowiring should be accomplished..
+	@Bean(name = "sessionFactory")			//sessionfactory creates the session for the application...
 	public SessionFactory getSessionFactory(DataSource dataSource) {
 		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
 		sessionBuilder.addProperties(getHibernateProperties());
-		sessionBuilder.addAnnotatedClass(Category.class);
+					//specify all the model classes... 
+		sessionBuilder.addAnnotatedClass(Category.class);		
 		sessionBuilder.addAnnotatedClass(Supplier.class);
 		return sessionBuilder.buildSessionFactory();
 	}
 	
-	@Autowired
+	@Autowired		//@Autowired annotation provides more fine-grained control over where and how autowiring should be accomplished..
 	@Bean(name = "transactionManager")
 	public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {
 		HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory);
