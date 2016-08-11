@@ -14,11 +14,12 @@ public class CategoryTest {
 		context.scan("com.niit");
 		context.refresh();
 		
+		//Here i'm going to perform basic database operations using hibernate provided functions....
 		
 		CategoryDAO categoryDAO = (CategoryDAO) context.getBean("categoryDAO");
 		Category category = (Category) context.getBean("category");
 		
-		category.setId("CTG001");
+		category.setId("CTG002");
 		category.setName("CTG_name_001");
 		category.setDescription("This is category001 description...");
 		

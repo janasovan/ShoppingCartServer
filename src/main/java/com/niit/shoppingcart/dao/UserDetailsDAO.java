@@ -13,9 +13,9 @@ public interface UserDetailsDAO {		//DAO - Data Access Object...
 	
 	public boolean save(UserDetails userDetails);		//to save the record that does not exist..
 	
-	public boolean update(UserDetails userDetails);	//to update the record that exist..
+	public boolean update(UserDetails userDetails);		//to update the record that exist..
 	
-	public boolean delete(UserDetails userDetails);	//to delete the record from userDetails..
+	public boolean delete(UserDetails userDetails);		//to delete the record from userDetails..
 	
 	public UserDetails get(String id);
 	

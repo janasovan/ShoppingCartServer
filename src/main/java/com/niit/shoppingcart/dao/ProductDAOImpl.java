@@ -7,14 +7,14 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.shoppingcart.model.Product;
 
+@EnableTransactionManagement
 @Repository(value = "productDAO")		//@Repository annotation is a specialization of the @Component annotation with similar use and functionality...
-public class ProductDAOImpl implements ProductDAO{
-
-	
+public class ProductDAOImpl implements ProductDAO{	
 	
 	@Autowired		//@Autowired annotation provides more fine-grained control over where and how autowiring should be accomplished..
 					//first we need to create a connection. 
@@ -23,7 +23,7 @@ public class ProductDAOImpl implements ProductDAO{
 	public ProductDAOImpl() {
 		super();
 	}
-
+		// getter/setter method for sessionFactory
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}

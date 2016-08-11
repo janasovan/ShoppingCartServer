@@ -7,20 +7,23 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.shoppingcart.model.Supplier;
 
-@Repository(value = "supplierDAO")	//@Repository annotation is a specialization of the @Component annotation with similar use and functionality...
+@EnableTransactionManagement
+@Repository(value = "supplierDAO")		//@Repository annotation is a specialization of the @Component annotation with similar use and functionality...
 public class SupplierDAOImpl implements SupplierDAO{
 
 	@Autowired		//@Autowired annotation provides more fine-grained control over where and how autowiring should be accomplished..
+					//first we need to create a connection. 
 	private SessionFactory sessionFactory;		//create session to make a connection..
 	
 	public SupplierDAOImpl() {
 		super();
 	}
-
+		// getter/setter method for sessionFactory
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}

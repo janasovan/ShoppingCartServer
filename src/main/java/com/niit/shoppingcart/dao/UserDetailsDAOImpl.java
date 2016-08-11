@@ -14,9 +14,7 @@ import com.niit.shoppingcart.model.UserDetails;
 
 @EnableTransactionManagement
 @Repository(value = "userDetailsDAO")		//@Repository annotation is a specialization of the @Component annotation with similar use and functionality...
-public class UserDetailsDAOImpl implements UserDetailsDAO{
-
-	
+public class UserDetailsDAOImpl implements UserDetailsDAO{	
 	
 	@Autowired		//@Autowired annotation provides more fine-grained control over where and how autowiring should be accomplished..
 					//first we need to create a connection. 
@@ -25,7 +23,7 @@ public class UserDetailsDAOImpl implements UserDetailsDAO{
 	public UserDetailsDAOImpl() {
 		super();
 	}
-
+		// getter/setter method for sessionFactory
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
@@ -41,7 +39,7 @@ public class UserDetailsDAOImpl implements UserDetailsDAO{
 	// Declare all CRUD Operations...
 	
 	@Transactional
-	public boolean save(UserDetails userDetails){		//to save record if record does not exist..
+	public boolean save(UserDetails userDetails){			//to save record if record does not exist..
 		try {			//take it on try-catch block so that if current session fails to save or fails to return true then it could return false...
 			sessionFactory.getCurrentSession().save(userDetails);		
 			return true;
@@ -53,7 +51,7 @@ public class UserDetailsDAOImpl implements UserDetailsDAO{
 	}
 	
 	@Transactional
-	public boolean update(UserDetails userDetails){	//to update the record that exist..
+	public boolean update(UserDetails userDetails){			//to update the record that exist..
 		try {			//take it on try-catch block so that if current session fails to save or fails to return true then it could return false...
 			sessionFactory.getCurrentSession().update(userDetails);
 			return true;
@@ -65,7 +63,7 @@ public class UserDetailsDAOImpl implements UserDetailsDAO{
 	}
 	
 	@Transactional
-	public boolean delete(UserDetails userDetails){	//to delete from userDetails..
+	public boolean delete(UserDetails userDetails){			//to delete from userDetails..
 		try {
 			sessionFactory.getCurrentSession().delete(userDetails);
 			return true;

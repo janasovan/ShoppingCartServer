@@ -7,22 +7,24 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
-@Entity
+@Entity		//specify that it is an entity...   **java class that mapped to a db table...
 @Table(name="Product_Table")		//if table name and domain class name is same, then no need to specify name here...
-@Component
+@Component		//@Component annotation marks a java class as a bean so the component-scanning mechanism of spring can pick it up and pull it into the application context..
 public class Product {
-
-	@Id		//specify id as primary key...
-	@Column//(name = "PRO_ID")
+	
+	/* declare the database column names for Product table... */
+	
+	@Id		//id is primary key 
+	@Column(name = "Pro_Id")		//specify the column name in database...
 	private String id;
 	
-	@Column//(name = "PRO_NAME")
+	@Column(name = "Pro_Name")		//specify the column name in database...
 	private String name;
 	
-	@Column//(name = "PRO_DESC")
+	@Column(name="Pro_Desc")		//specify the column name in database... 
 	private String description;
 	
-	@Column//(name = "PRO_PRICE")
+	@Column(name = "Pro_Price")		//specify the column name in database...
 	private int price;
 	
 	/* getters/setters for all the fields taken... */
@@ -51,7 +53,6 @@ public class Product {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	
 	
 	
 }
