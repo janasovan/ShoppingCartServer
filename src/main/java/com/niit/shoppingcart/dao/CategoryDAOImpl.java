@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.shoppingcart.model.Category;
 
+
 @EnableTransactionManagement
 @Repository(value = "categoryDAO")		//@Repository annotation is a specialization of the @Component annotation with similar use and functionality...
 public class CategoryDAOImpl implements CategoryDAO{	
@@ -20,9 +21,10 @@ public class CategoryDAOImpl implements CategoryDAO{
 					//first we need to create a connection. 
 	private SessionFactory sessionFactory;		//Create a session for making connection...  **ApplicationContextConfiguration.java
 	
-	public CategoryDAOImpl() {
+	public CategoryDAOImpl() {		//defaullt constructor of CategoryDAOImpl...
 		super();
 	}
+	
 		// getter/setter method for sessionFactory
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
@@ -55,7 +57,7 @@ public class CategoryDAOImpl implements CategoryDAO{
 		try {			//take it on try-catch block so that if current session fails to save or fails to return true then it could return false...
 			sessionFactory.getCurrentSession().update(category);
 			return true;
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;

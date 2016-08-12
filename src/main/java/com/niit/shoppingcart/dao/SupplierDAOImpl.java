@@ -20,7 +20,7 @@ public class SupplierDAOImpl implements SupplierDAO{
 					//first we need to create a connection. 
 	private SessionFactory sessionFactory;		//create session to make a connection..
 	
-	public SupplierDAOImpl() {
+	public SupplierDAOImpl() {		//defaullt constructor of SupplierDAOImpl...
 		super();
 	}
 		// getter/setter method for sessionFactory
@@ -70,7 +70,7 @@ public class SupplierDAOImpl implements SupplierDAO{
 				try {
 					sessionFactory.getCurrentSession().delete(supplier);
 					return true;
-				} catch (HibernateException e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 					return false;

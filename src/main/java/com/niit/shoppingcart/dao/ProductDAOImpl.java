@@ -20,7 +20,7 @@ public class ProductDAOImpl implements ProductDAO{
 					//first we need to create a connection. 
 	private SessionFactory sessionFactory;		//Create a session for making connection...  **ApplicationContextConfiguration.java
 				
-	public ProductDAOImpl() {
+	public ProductDAOImpl() {	//defaullt constructor of ProductDAOImpl...
 		super();
 	}
 		// getter/setter method for sessionFactory
@@ -55,7 +55,7 @@ public class ProductDAOImpl implements ProductDAO{
 		try {			//take it on try-catch block so that if current session fails to save or fails to return true then it could return false...
 			sessionFactory.getCurrentSession().update(product);
 			return true;
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;

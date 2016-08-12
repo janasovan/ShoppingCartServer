@@ -20,7 +20,7 @@ public class UserDetailsDAOImpl implements UserDetailsDAO{
 					//first we need to create a connection. 
 	private SessionFactory sessionFactory;		//Create a session for making connection...  **ApplicationContextConfiguration.java
 				
-	public UserDetailsDAOImpl() {
+	public UserDetailsDAOImpl() {		//defaullt constructor of UserDetailsDAOImpl...
 		super();
 	}
 		// getter/setter method for sessionFactory
@@ -67,7 +67,7 @@ public class UserDetailsDAOImpl implements UserDetailsDAO{
 		try {
 			sessionFactory.getCurrentSession().delete(userDetails);
 			return true;
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
