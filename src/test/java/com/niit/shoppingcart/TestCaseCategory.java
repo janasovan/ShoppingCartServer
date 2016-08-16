@@ -2,8 +2,6 @@ package com.niit.shoppingcart;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,60 +13,86 @@ import com.niit.shoppingcart.model.Category;
 public class TestCaseCategory {
 
 	@Autowired
-	CategoryDAO categoryDAO;
+	CategoryDAO categoryDAO;	//instance of CategoryDAO created...
 	
 	@Autowired
-	Category category;
+	Category category;		//instance of Category created...
 	
-	AnnotationConfigApplicationContext context;
+	AnnotationConfigApplicationContext context;		//instance of AnnotationConfigApplicationContext created...
 	
 	
-	//Initialize test case...
+	//Initialize the instances...
 	@Before
-	public void init(){
+	public void init(){		//init is just a method to initialize the instances...
 		
-		context = new AnnotationConfigApplicationContext();
-		context.scan("com.niit");
-		context.refresh();
+		context = new AnnotationConfigApplicationContext();		//object of AnnotationConfigApplicationContext created...
+		context.scan("com.niit");		//scan base package of the application...
+		context.refresh();		//referesh the application...
 		
-		categoryDAO = (CategoryDAO) context.getBean("categoryDAO");
-		category = (Category) context.getBean("category");
-		
+		categoryDAO = (CategoryDAO) context.getBean("categoryDAO");		//create object of CategoryDAO and typecast it...
+		category = (Category) context.getBean("category");		//create object of Category and typecast it...	
 		
 	}
 	
-	/*
+
 	@Test
-	public void categoryListTestCase(){
+	public void categoryListTestCase(){		// list operation is used to check the list in db table...
 		
-		List<Category> list = categoryDAO.list();
-		int rowCount = list.size();
+		//List<Category> list = categoryDAO.list();
+		//int rowCount = list.size();
+		//assertEquals("Category List Test Case ", rowCount, 3);		//instead of using these three lines we can use just a single line as follows...
 		
-		assertEquals("Category List Test Case ", rowCount, 3);		
+		assertEquals(categoryDAO.list().size(), 3);
 		
-	}*/
+	}
 	
-	/*
 	@Test
-	public void catagoryAddTestCase(){
+	public void catagoryAddTestCase(){		// save operation is used to save/add data in database...
 		
 		category.setId("CTG004");
 		category.setName("CTG_Name_004");
 		category.setDescription("CTG_hksdfkhjskgklsdgf");
 		
-		boolean flag = categoryDAO.save(category);
-		assertEquals(flag, true);
-	}*/
+		//boolean flag = categoryDAO.save(category);
+		//assertEquals(flag, true);			//instead of using these two lines we can use just a single line as follows...
+		
+		assertEquals(categoryDAO.save(category), true);
+		
+	}
 	
-	//*
 	@Test
-	public void categoryGetTestCase(){
+	public void categoryUpdateTestCase(){		// update operation is used to update data in database...
 		
-		category = categoryDAO.get("CTG001");
+		category.setId("CTG001");
+		category.setName("CTG_name_001");
+		category.setDescription("This is CTG001 modified");
 		
-		assertEquals("CTG_name_001", category.getName());
+		//boolean flag = categoryDAO.update(category);
+		//assertEquals(flag, true);			//instead of using these two lines we can use just a single line as follows...
+				
+		assertEquals(categoryDAO.update(category), true);
+	}
 	
-		System.out.println("perfect run...."+category.getName());
+	
+	public void categoryDeleteTestCase(){		// delete operation is used to delete data from database...
+		
+		category.setId("CTG001");
+		
+		//boolean flag = categoryDAO.delete(category);
+		//assertEquals(flag, true);			//instead of using these two lines we can use just a single line as follows...
+		
+		assertEquals(categoryDAO.delete(category), true);
+	}
+	
+	@Test
+	public void categoryGetTestCase(){		// get operation is used to get/fetch data from database...
+		
+		//category = categoryDAO.get("CTG001");		
+		//assertEquals("CTG_name_001", category.getName());		//instead of using these two lines we can use just a single line as follows...
+		
+		assertEquals("CTG_name_001", categoryDAO.get("CTG001").getName());
+	
+		System.out.println("perfect run....");		//this is just a printline statement and can be removed...
 	}
 	//*/
 	
