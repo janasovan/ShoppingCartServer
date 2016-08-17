@@ -49,9 +49,9 @@ public class TestCaseCategory {
 	@Test
 	public void catagoryAddTestCase(){		// save operation is used to save/add data in database...
 		
-		category.setId("CTG004");
-		category.setName("CTG_Name_004");
-		category.setDescription("CTG_hksdfkhjskgklsdgf");
+		category.setId("CTG002");
+		category.setName("CTG_name_002");
+		category.setDescription("This is CTG002 description...");
 		
 		//boolean flag = categoryDAO.save(category);
 		//assertEquals(flag, true);			//instead of using these two lines we can use just a single line as follows...
@@ -63,9 +63,9 @@ public class TestCaseCategory {
 	@Test
 	public void categoryUpdateTestCase(){		// update operation is used to update data in database...
 		
-		category.setId("CTG001");
-		category.setName("CTG_name_001");
-		category.setDescription("This is CTG001 modified");
+		category.setId("CTG002");
+		category.setName("CTG_name_002");
+		category.setDescription("This is CTG002 description...");
 		
 		//boolean flag = categoryDAO.update(category);
 		//assertEquals(flag, true);			//instead of using these two lines we can use just a single line as follows...
@@ -73,15 +73,18 @@ public class TestCaseCategory {
 		assertEquals(categoryDAO.update(category), true);
 	}
 	
-	
+	@Test
 	public void categoryDeleteTestCase(){		// delete operation is used to delete data from database...
+
+		category.setId("CTG001");		
 		
-		category.setId("CTG001");
-		
-		//boolean flag = categoryDAO.delete(category);
+		//boolean flag = categoryDAO.delete(category);		
 		//assertEquals(flag, true);			//instead of using these two lines we can use just a single line as follows...
 		
 		assertEquals(categoryDAO.delete(category), true);
+		
+		System.out.println("Successfully deleted...");
+		
 	}
 	
 	@Test
@@ -94,7 +97,7 @@ public class TestCaseCategory {
 	
 		System.out.println("perfect run....");		//this is just a printline statement and can be removed...
 	}
-	//*/
+	
 	
 
 }
