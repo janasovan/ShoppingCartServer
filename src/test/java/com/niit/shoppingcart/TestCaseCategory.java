@@ -49,9 +49,9 @@ public class TestCaseCategory {
 	@Test
 	public void catagoryAddTestCase(){		// save operation is used to save/add data in database...
 		
-		category.setId("CTG002");
-		category.setName("CTG_name_002");
-		category.setDescription("This is CTG002 description...");
+		category.setId("CTG001");
+		category.setName("CTG_name_001");
+		category.setDescription("This is CTG001 description...");
 		
 		//boolean flag = categoryDAO.save(category);
 		//assertEquals(flag, true);			//instead of using these two lines we can use just a single line as follows...
