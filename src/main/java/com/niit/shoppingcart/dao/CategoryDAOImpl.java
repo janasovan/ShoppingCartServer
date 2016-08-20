@@ -96,6 +96,7 @@ public class CategoryDAOImpl implements CategoryDAO{
 		String hql = " from Category where id = " + "'"	+ id + "'";	
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		@SuppressWarnings("unchecked")
 		List<Category> list = query.list();
 		
 		if(list==null){
@@ -106,6 +107,7 @@ public class CategoryDAOImpl implements CategoryDAO{
 		}		
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Category> list() {
 		

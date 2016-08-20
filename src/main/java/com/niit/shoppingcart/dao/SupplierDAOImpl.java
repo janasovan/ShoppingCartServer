@@ -84,6 +84,7 @@ public class SupplierDAOImpl implements SupplierDAO{
 				
 				Query query = sessionFactory.getCurrentSession().createQuery(hql);
 				
+				@SuppressWarnings("unchecked")
 				List<Supplier> list = query.list();
 				
 				if(list==null){
@@ -94,6 +95,7 @@ public class SupplierDAOImpl implements SupplierDAO{
 				}
 			}
 			
+			@SuppressWarnings("unchecked")
 			@Transactional
 			public List<Supplier> list(){
 				

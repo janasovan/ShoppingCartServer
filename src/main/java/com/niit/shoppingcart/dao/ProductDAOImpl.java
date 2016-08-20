@@ -83,6 +83,7 @@ public class ProductDAOImpl implements ProductDAO{
 		String hql = " from Product where id = " + "'"	+ id + "'";	//  select * from Product where id = '___'
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		@SuppressWarnings("unchecked")
 		List<Product> list = query.list();
 		
 		if(list==null){
@@ -93,6 +94,7 @@ public class ProductDAOImpl implements ProductDAO{
 		}		
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Product> list() {
 		

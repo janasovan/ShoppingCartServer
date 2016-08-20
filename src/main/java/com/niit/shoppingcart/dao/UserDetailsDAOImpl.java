@@ -81,6 +81,7 @@ public class UserDetailsDAOImpl implements UserDetailsDAO{
 		String hql = " from UserDetails where id = " + "'"	+ id + "'";	//  select * from UserDetails where id = '___'
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		@SuppressWarnings("unchecked")
 		List<UserDetails> list = query.list();
 		
 		if(list==null){
@@ -91,6 +92,7 @@ public class UserDetailsDAOImpl implements UserDetailsDAO{
 		}		
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<UserDetails> list() {
 		

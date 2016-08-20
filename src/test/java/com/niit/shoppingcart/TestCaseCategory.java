@@ -42,16 +42,16 @@ public class TestCaseCategory {
 		//int rowCount = list.size();
 		//assertEquals("Category List Test Case ", rowCount, 3);		//instead of using these three lines we can use just a single line as follows...
 		
-		assertEquals(categoryDAO.list().size(), 3);
+		assertEquals(categoryDAO.list().size(), 2);
 		
 	}
 	
 	@Test
 	public void catagoryAddTestCase(){		// save operation is used to save/add data in database...
 		
-		category.setId("CTG001");
-		category.setName("CTG_name_001");
-		category.setDescription("This is CTG001 description...");
+		category.setId("CTG002");
+		category.setName("CTG_name_002");
+		category.setDescription("This is CTG002 description...");
 		
 		//boolean flag = categoryDAO.save(category);
 		//assertEquals(flag, true);			//instead of using these two lines we can use just a single line as follows...
@@ -63,9 +63,9 @@ public class TestCaseCategory {
 	@Test
 	public void categoryUpdateTestCase(){		// update operation is used to update data in database...
 		
-		category.setId("CTG002");
-		category.setName("CTG_name_002");
-		category.setDescription("This is CTG002 description...");
+		category.setId("CTG003");
+		category.setName("CTG_name_003");
+		category.setDescription("This is CTG003 description modified...");
 		
 		//boolean flag = categoryDAO.update(category);
 		//assertEquals(flag, true);			//instead of using these two lines we can use just a single line as follows...
@@ -93,7 +93,7 @@ public class TestCaseCategory {
 		//category = categoryDAO.get("CTG001");		
 		//assertEquals("CTG_name_001", category.getName());		//instead of using these two lines we can use just a single line as follows...
 		
-		assertEquals("CTG_name_001", categoryDAO.get("CTG001").getName());
+		assertEquals("CTG_name_004", categoryDAO.get("CTG004").getName());
 	
 		System.out.println("perfect run....");		//this is just a printline statement and can be removed...
 	}
