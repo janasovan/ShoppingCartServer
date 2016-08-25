@@ -15,10 +15,13 @@ public interface UserDetailsDAO {		//DAO - Data Access Object...
 	
 	public boolean update(UserDetails userDetails);		//to update the record that exist..
 	
+	public boolean saveOrUpdate(UserDetails userDetails);
+	
 	public boolean delete(UserDetails userDetails);		//to delete the record from userDetails..
 	
 	public UserDetails get(String id);
 	
 	public List<UserDetails> list();
 	
+	public boolean isValidUser(String id, String password);
 }

@@ -2,7 +2,6 @@ package com.niit.shoppingcart.dao;
 
 import java.util.List;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +16,13 @@ import com.niit.shoppingcart.model.UserDetails;
 public class UserDetailsDAOImpl implements UserDetailsDAO{	
 	
 	@Autowired		//@Autowired annotation provides more fine-grained control over where and how autowiring should be accomplished..
-					//first we need to create a connection. 
 	private SessionFactory sessionFactory;		//Create a session for making connection...  **ApplicationContextConfiguration.java
 				
 	public UserDetailsDAOImpl() {		//defaullt constructor of UserDetailsDAOImpl...
-		super();
 	}
-		// getter/setter method for sessionFactory
+	
+	// getter/setter method for sessionFactory
+	
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
@@ -43,8 +42,7 @@ public class UserDetailsDAOImpl implements UserDetailsDAO{
 		try {			//take it on try-catch block so that if current session fails to save or fails to return true then it could return false...
 			sessionFactory.getCurrentSession().save(userDetails);		
 			return true;
-		} catch (HibernateException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
@@ -55,8 +53,7 @@ public class UserDetailsDAOImpl implements UserDetailsDAO{
 		try {			//take it on try-catch block so that if current session fails to save or fails to return true then it could return false...
 			sessionFactory.getCurrentSession().update(userDetails);
 			return true;
-		} catch (HibernateException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
@@ -68,7 +65,6 @@ public class UserDetailsDAOImpl implements UserDetailsDAO{
 			sessionFactory.getCurrentSession().delete(userDetails);
 			return true;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
@@ -83,8 +79,7 @@ public class UserDetailsDAOImpl implements UserDetailsDAO{
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		@SuppressWarnings("unchecked")
 		List<UserDetails> list = query.list();
-		
-		if(list==null){
+		if(list==null ||list.size()==0 ){
 			return null;
 		}
 		else{
@@ -100,7 +95,32 @@ public class UserDetailsDAOImpl implements UserDetailsDAO{
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		return query.list();
-
+	}	
+	
+	@Transactional
+	public boolean saveOrUpdate(UserDetails userDetails) {
+		try {			//take it on try-catch block so that if current session fails to save or fails to return true then it could return false...
+			sessionFactory.getCurrentSession().saveOrUpdate(userDetails);		
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
+	
+	@Transactional
+	public boolean isValidUser(String id, String password) {
+		String hql="from UserDetails where id = :id and password = :password";
 		
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("id", id);
+		query.setParameter("password", password);
+		
+		@SuppressWarnings("unchecked")
+		List<UserDetails> list = (List<UserDetails>) query.list();
+		if(list != null && !list.isEmpty()){
+			return true;
+		}		
+		return false;
+	}		
 }

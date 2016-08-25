@@ -16,10 +16,14 @@ public interface CategoryDAO {		//DAO - Data Access Object...
 	
 	public boolean update(Category category);	//to update the record that exist..
 	
+	public boolean saveOrUpdate(Category category);
+	
 	public boolean delete(Category category);	//to delete the record from category..
 	
 	public Category get(String id);
 	
 	public List<Category> list();
+	
+	public boolean isValidUser(String id, String password);
 	
 }

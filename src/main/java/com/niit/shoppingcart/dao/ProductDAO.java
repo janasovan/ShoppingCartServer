@@ -15,10 +15,13 @@ public interface ProductDAO {		//DAO - Data Access Object...
 	
 	public boolean update(Product product);		//to update the record that exist..
 	
+	public boolean saveOrUpdate(Product product);
+	
 	public boolean delete(Product product);		//to delete the record from Product..
 	
 	public Product get(String id);
 	
 	public List<Product> list();
 	
+	public boolean isValidUser(String id, String password);
 }

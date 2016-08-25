@@ -8,16 +8,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.niit.shoppingcart.dao.ProductDAO;
+import com.niit.shoppingcart.model.Category;
 import com.niit.shoppingcart.model.Product;
+import com.niit.shoppingcart.model.Supplier;
 
 
 public class TestCaseProduct {
 
-	@Autowired
+	/*@Autowired
 	ProductDAO productDAO;	//instance of ProductDAO created...
 	
 	@Autowired
 	Product product;		//instance of Product created...
+	
+	@Autowired
+	Supplier supplier;
+	
+	@Autowired
+	Category category;
 	
 	AnnotationConfigApplicationContext context;		//instance of AnnotationConfigApplicationContext created...
 	
@@ -30,11 +38,13 @@ public class TestCaseProduct {
 		context.refresh();		//referesh the application...
 		
 		productDAO = (ProductDAO) context.getBean("productDAO");
-		product = (Product) context.getBean("product");		
+		product = (Product) context.getBean("product");	
+		category = (Category) context.getBean("category");
+		supplier = (Supplier) context.getBean("supplier");
 		
 	}
 	
-	@Test
+	//@Test
 	public void productListTestCase(){		// list operation is used to check the list in database table...
 		
 		//List<Product> list = productDAO.list();
@@ -48,10 +58,18 @@ public class TestCaseProduct {
 	@Test
 	public void productAddTestCase(){		// add operation is used to save/add data in database...
 		
-		product.setId("PRO005");
-		product.setName("PRO_name_005");
-		product.setDescription("This is product005 description...");
+		product.setId("PRO001");
+		product.setName("PRO_name_001");
+		product.setDescription("This is product001 description...");
 		product.setPrice(41500);
+		
+		category.setId("CTG002");
+		product.setCategory(category);
+		
+		supplier.setId("SUP001");
+		product.setSupplier(supplier);
+		
+		
 		
 		//boolean flag = productDAO.save(product);
 		//assertEquals(flag, true);		//instead of using these two lines we can use just a single line as follows...
@@ -60,7 +78,7 @@ public class TestCaseProduct {
 				
 	}
 	
-	@Test
+	//@Test
 	public void productUpdateTestCase(){
 		
 		product.setId("PRO002");
@@ -71,7 +89,7 @@ public class TestCaseProduct {
 		assertEquals(productDAO.update(product), true);
 	}
 	
-	
+	//@Test
 	public void productDeleteTestCase(){
 		
 		product.setId("");
@@ -79,15 +97,15 @@ public class TestCaseProduct {
 		assertEquals(productDAO.delete(product), true);
 	}
 
-	@Test
+	//@Test
 	public void productGetTestCase(){		// get operation is used to get/fetch data from database...
 		
 		//product = productDAO.get("PRO001");
 		//assertEquals("PRO_name_001", product.getName());		//instead of using these three lines we can use just a single line as follows...
 		
-		assertEquals(productDAO.get("PRO001").getName(), "PRO_name_001");
+		//assertEquals(productDAO.get("PRO001").getName(), "PRO_name_001");
 		
 		System.out.println("Perfect Match...");
-	}
+	}*/
 	
 }

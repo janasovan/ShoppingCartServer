@@ -20,10 +20,10 @@ public class ProductTest {
 		ProductDAO productDAO = (ProductDAO) context.getBean("productDAO");
 		Product product = (Product) context.getBean("product");
 		
-		product.setId("PRO002");
+	/*	product.setId("PRO002");
 		product.setName("PRO_name_001");
 		product.setDescription("This is product001 description...");
-		product.setPrice(5000);
+		product.setPrice(5000);*/
 				
 		if(productDAO.save(product) == true){
 			System.out.println("Product created successfully...");

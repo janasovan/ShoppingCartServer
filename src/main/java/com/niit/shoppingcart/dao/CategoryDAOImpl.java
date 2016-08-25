@@ -26,7 +26,7 @@ public class CategoryDAOImpl implements CategoryDAO{
 	private SessionFactory sessionFactory;		//Create a session for making connection...  **ApplicationContextConfiguration.java
 	
 	public CategoryDAOImpl() {		//defaullt constructor of CategoryDAOImpl...
-		super();
+		
 	}
 	
 		// getter/setter method for sessionFactory
@@ -51,8 +51,8 @@ public class CategoryDAOImpl implements CategoryDAO{
 			sessionFactory.getCurrentSession().save(category);
 			log.debug("End of save method...");
 			return true;
-		} catch (HibernateException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
+			
 			log.error("Error occured : " + e.getMessage());
 			e.printStackTrace();
 			return false;
@@ -67,12 +67,13 @@ public class CategoryDAOImpl implements CategoryDAO{
 			log.debug("End of update method...");
 			return true;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			log.error("Error occured : " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
 	}
+	
 	
 	@Transactional
 	public boolean delete(Category category){	//to delete from category..
@@ -81,12 +82,13 @@ public class CategoryDAOImpl implements CategoryDAO{
 			sessionFactory.getCurrentSession().delete(category);
 			log.debug("End of delete method...");
 			return true;
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			log.error("Error occured : " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
 	}
+	
 	
 	@Transactional
 	public Category get(String id){
@@ -107,6 +109,7 @@ public class CategoryDAOImpl implements CategoryDAO{
 		}		
 	}
 	
+	
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Category> list() {
@@ -115,8 +118,43 @@ public class CategoryDAOImpl implements CategoryDAO{
 		String hql = " from Category ";
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		
+		log.debug("list method ends...");
 		return query.list();
 
 	}
+
+	
+	@Transactional
+	public boolean saveOrUpdate(Category category) {
+		try {			//take it on try-catch block so that if current session fails to save or fails to return true then it could return false...
+			log.debug("Starting of saveOrUpdate method...");
+			sessionFactory.getCurrentSession().saveOrUpdate(category);
+			log.debug("End of saveOrUpdate method...");
+			return true;
+		} catch (Exception e) {
+			log.error("Error occured : " + e.getMessage());
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	
+	@Transactional
+	public boolean isValidUser(String id, String password) {
+		log.debug("saveOrUpdate method starts...");
 		
+		String hql = "from Category where id = :id and password = :password";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("id", id);
+		query.setParameter("password", password);
+		
+		@SuppressWarnings("unchecked")
+		List<Category> list = (List<Category>) query.list();
+		if(list != null && !list.isEmpty()){
+			log.debug("saveOrUpdate method ends...");
+			return true;
+		}
+		return false;
+	}		
 }

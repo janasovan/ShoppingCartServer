@@ -45,8 +45,7 @@ public class ProductDAOImpl implements ProductDAO{
 		try {			//take it on try-catch block so that if current session fails to save or fails to return true then it could return false...
 			sessionFactory.getCurrentSession().save(product);		
 			return true;
-		} catch (HibernateException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
@@ -69,7 +68,7 @@ public class ProductDAOImpl implements ProductDAO{
 		try {
 			sessionFactory.getCurrentSession().delete(product);
 			return true;
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
@@ -102,7 +101,32 @@ public class ProductDAOImpl implements ProductDAO{
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		return query.list();
-
 	}
+	
+	@Transactional
+	public boolean saveOrUpdate(Product product) {
+		try{
+			sessionFactory.getCurrentSession().saveOrUpdate(product);
+			return true;
+		} catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}		
+	}
+	
+	@Transactional
+	public boolean isValidUser(String id, String password) {
+		String hql = "from Product where id = :id and password = :password";
 		
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("id", id);
+		query.setParameter("password", password);
+		
+		@SuppressWarnings("unchecked")
+		List<Product> list = (List<Product>) query.list();
+		if(list != null && !list.isEmpty()){
+			return true;
+		}		
+		return false;
+	}
 }
