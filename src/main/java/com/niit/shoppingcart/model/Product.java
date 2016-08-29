@@ -1,13 +1,15 @@
 package com.niit.shoppingcart.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+
 
 @Entity		//specify that it is an entity...   **java class that mapped to a db table...
 @Table		//if table name and domain class name is same, then no need to specify name here...
@@ -17,16 +19,9 @@ public class Product {
 	/* declare the database column names for Product table... */
 	
 	@Id
-	@Column
 	private String id;
-	
-	@Column
 	private String name;
-	
-	@Column
 	private String description;
-	
-	@Column
 	private int price;
 	
 	@ManyToOne
@@ -37,7 +32,29 @@ public class Product {
 	@JoinColumn(name = "categoryId")
 	Category category;
 	
+	@Transient
+	private MultipartFile file;
+	
+	private String productImage;
+	
+	
 	/* getters/setters for all the fields taken... */
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
+	public String getProductImage() {
+		return productImage;
+	}
+
+	public void setProductImage(String productImage) {
+		this.productImage = productImage;
+	}
 
 	public String getId() {
 		return id;
