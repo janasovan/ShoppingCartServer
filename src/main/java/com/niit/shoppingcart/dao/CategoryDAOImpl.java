@@ -51,8 +51,7 @@ public class CategoryDAOImpl implements CategoryDAO{
 			sessionFactory.getCurrentSession().save(category);
 			log.debug("End of save method...");
 			return true;
-		} catch (Exception e) {
-			
+		} catch (Exception e) {			
 			log.error("Error occured : " + e.getMessage());
 			e.printStackTrace();
 			return false;

@@ -13,7 +13,7 @@ import com.niit.shoppingcart.model.Supplier;
 
 public class TestCaseSupplier {
 
-	/*@Autowired
+	@Autowired
 	SupplierDAO supplierDAO;	//instance of SupplierDAO created...
 	
 	@Autowired
@@ -45,7 +45,7 @@ public class TestCaseSupplier {
 		
 	}
 	
-	//@Test
+	@Test
 	public void supplierAddTestCase(){
 		supplier.setId("SUP002");
 		supplier.setName("Big Bazar");
@@ -64,6 +64,6 @@ public class TestCaseSupplier {
 		//assertEquals("Reliance Trendz", supplier.getName());		//instead of using these three lines we can use just a single line as follows...
 		
 		assertEquals(supplierDAO.get("SUP001").getName(), "Pantaloons");
-	}*/
+	}
 	
 }
