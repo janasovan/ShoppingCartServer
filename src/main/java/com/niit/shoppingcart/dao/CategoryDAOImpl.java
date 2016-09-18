@@ -2,7 +2,6 @@ package com.niit.shoppingcart.dao;
 
 import java.util.List;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -28,19 +27,19 @@ public class CategoryDAOImpl implements CategoryDAO{
 	public CategoryDAOImpl() {		//defaullt constructor of CategoryDAOImpl...
 		
 	}
+	public CategoryDAOImpl(SessionFactory sessionFactory){		//create CategoryDAOImpl construstor taking sessionfactory as parameter..
+		this.sessionFactory = sessionFactory;
+	}
 	
-		// getter/setter method for sessionFactory
+		/*  getter/setter method for sessionFactory  */
+	
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
-	}
-
-	public CategoryDAOImpl(SessionFactory sessionFactory){		//create CategoryDAOImpl construstor taking sessionfactory as parameter..
-		this.sessionFactory = sessionFactory;
-	}
+	}	
 	
 	// Declare all CRUD Operations...
 	
@@ -137,23 +136,5 @@ public class CategoryDAOImpl implements CategoryDAO{
 			return false;
 		}
 	}
-
 	
-	@Transactional
-	public boolean isValidUser(String id, String password) {
-		log.debug("saveOrUpdate method starts...");
-		
-		String hql = "from Category where id = :id and password = :password";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setParameter("id", id);
-		query.setParameter("password", password);
-		
-		@SuppressWarnings("unchecked")
-		List<Category> list = (List<Category>) query.list();
-		if(list != null && !list.isEmpty()){
-			log.debug("saveOrUpdate method ends...");
-			return true;
-		}
-		return false;
-	}		
 }

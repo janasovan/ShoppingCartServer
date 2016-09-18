@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.niit.shoppingcart.model.Supplier;
-import com.niit.shoppingcart.model.UserDetails;
 
 @Repository		//@Repository annotation is a specialization of the @Component annotation with similar use and functionality...
 public interface SupplierDAO {		//DAO - Data Access Object...
@@ -23,6 +22,4 @@ public interface SupplierDAO {		//DAO - Data Access Object...
 	public Supplier get(String id);
 
 	public List<Supplier> list();
-	
-	public boolean isValidUser(String id, String password);
 }

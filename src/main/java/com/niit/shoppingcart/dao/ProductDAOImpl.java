@@ -2,7 +2,6 @@ package com.niit.shoppingcart.dao;
 
 import java.util.List;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,7 +78,7 @@ public class ProductDAOImpl implements ProductDAO{
 	public Product get(String id){
 		
 			//we need to declare the name i.e. hql (hibernate query language) to get response from the query related to db..
-		String hql = " from Product where id = " + "'"	+ id + "'";	//  select * from Product where id = '___'
+		String hql = " from Product where id = " + "'"	+ id + "'";
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		@SuppressWarnings("unchecked")
@@ -114,19 +113,4 @@ public class ProductDAOImpl implements ProductDAO{
 		}		
 	}
 	
-	@Transactional
-	public boolean isValidUser(String id, String password) {
-		String hql = "from Product where id = :id and password = :password";
-		
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setParameter("id", id);
-		query.setParameter("password", password);
-		
-		@SuppressWarnings("unchecked")
-		List<Product> list = (List<Product>) query.list();
-		if(list != null && !list.isEmpty()){
-			return true;
-		}		
-		return false;
-	}
 }

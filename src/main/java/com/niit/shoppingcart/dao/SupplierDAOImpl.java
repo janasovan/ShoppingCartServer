@@ -2,7 +2,6 @@ package com.niit.shoppingcart.dao;
 
 import java.util.List;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,20 +110,5 @@ public class SupplierDAOImpl implements SupplierDAO{
 			return false;
 		}
 	}
-			
-	@Transactional
-	public boolean isValidUser(String id, String password) {
-		String hql = "from UserDetails where id = :id and password = :password";
 		
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setParameter("id", id);
-		query.setParameter("password", password);
-		
-		@SuppressWarnings("unchecked")
-		List<Supplier> list = (List<Supplier>) query.list();
-		if(list != null && !list.isEmpty()){
-			return true;
-		}
-		return false;
-	}	
 }

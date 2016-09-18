@@ -22,6 +22,4 @@ public interface ProductDAO {		//DAO - Data Access Object...
 	public Product get(String id);
 	
 	public List<Product> list();
-	
-	public boolean isValidUser(String id, String password);
 }

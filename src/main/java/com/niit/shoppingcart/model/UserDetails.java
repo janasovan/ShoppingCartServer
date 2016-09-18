@@ -1,42 +1,56 @@
 package com.niit.shoppingcart.model;
 
 
-import javax.persistence.Column;
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "User")
 @Component
-public class UserDetails {
+public class UserDetails implements Serializable {
 
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 10L;
+	
 	/* declare the database column names for Product table... */
 	
-	
 	@Id
-	@Column
+	@Size(min = 6, max = 10, message = "Id should contain 6-10 characters")
 	private String id;
 	
-	@Column
+	@NotNull(message = "Name field can not be blank")
+	@Size(min=5, max=25, message="Your name should be between 5 - 25 characters.")
 	private String name;
 	
-	@Column
+	@NotNull(message="Please select a password")
+	@Length(min=5, max=10, message="Password should be between 5 - 10 charactes")
 	private String password;
 	
-	@Column
+	@NotNull(message = "Address field can not be blank")
 	private String address;
 	
-	@Column
+	@Pattern(regexp="(^$|[0-9]{10})", message = "Please provide a valid phone no.")
 	private String phone;
 
-	@Column
+	@Email(message="Please provide a valid email address")
 	private String email;
 	
-	@Column
-	private boolean admin;	
+	private String role;
+	
+	private boolean enabled;
 	
 	/* getters/setters for all the fields taken... */
 	
@@ -76,11 +90,17 @@ public class UserDetails {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public boolean isAdmin() {
-		return admin;
+	public String getRole() {
+		return role;
 	}
-	public void setAdmin(boolean admin) {
-		this.admin = admin;
+	public void setRole(String role) {
+		this.role = role;
+	}
+	public boolean isEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 	
 

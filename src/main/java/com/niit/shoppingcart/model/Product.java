@@ -6,7 +6,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,12 +21,17 @@ public class Product {
 	/* declare the database column names for Product table... */
 	
 	@Id
+	@Size(min = 6, max = 10, message = "Id should contain 6-10 characters")
 	private String id;
-
+	
+	@NotEmpty(message = "Name field can not be blank")
+	@Size(min = 3 , message = "Name contains atleast 3 character")
 	private String name;
 	
+	@NotEmpty(message = "Description field can not be blank")
+	@Size(min = 5 , message = "description contains atleast 5 characters")
 	private String description;
-	
+		
 	private int price;
 	
 	@ManyToOne

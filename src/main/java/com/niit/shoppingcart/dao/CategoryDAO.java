@@ -24,6 +24,4 @@ public interface CategoryDAO {		//DAO - Data Access Object...
 	
 	public List<Category> list();
 	
-	public boolean isValidUser(String id, String password);
-	
 }

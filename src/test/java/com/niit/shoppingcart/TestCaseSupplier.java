@@ -45,7 +45,7 @@ public class TestCaseSupplier {
 		
 	}
 	
-	@Test
+	//@Test
 	public void supplierAddTestCase(){
 		supplier.setId("SUP002");
 		supplier.setName("Big Bazar");

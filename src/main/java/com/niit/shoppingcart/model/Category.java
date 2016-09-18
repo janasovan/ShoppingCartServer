@@ -8,7 +8,9 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 
 @Entity	//specify that it is an entity...   **java class that mapped to a db table...
@@ -20,12 +22,17 @@ public class Category {
 	
 	@Id
 	@Column(name="categoryId")
+	@Size(min = 6, max = 10, message = "Id should contain 6-10 characters")
 	private String id;
 	
 	@Column
+	@NotEmpty(message = "Name field can not be blank")
+	@Size(min = 3 , message = "Name contains atleast 3 character")
 	private String name;
 	
 	@Column
+	@NotEmpty(message = "Description field can not be blank")
+	@Size(min = 5 , message = "description contains atleast 5 characters")
 	private String description;
 	
 	@OneToMany( mappedBy="category",fetch=FetchType.EAGER)

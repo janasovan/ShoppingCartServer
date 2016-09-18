@@ -41,7 +41,6 @@ public class UserDetailsDAOImpl implements UserDetailsDAO{
 	public boolean save(UserDetails userDetails){			//to save record if record does not exist..
 		try {			//take it on try-catch block so that if current session fails to save or fails to return true then it could return false...
 			sessionFactory.getCurrentSession().save(userDetails);
-			System.out.println(userDetails.getName());
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -109,6 +108,7 @@ public class UserDetailsDAOImpl implements UserDetailsDAO{
 		}
 	}
 	
+	//----------------------------------------------------------------------------
 	@Transactional
 	public boolean isValidUser(String id, String password) {
 		String hql="from UserDetails where id = :id and password = :password";
@@ -123,5 +123,7 @@ public class UserDetailsDAOImpl implements UserDetailsDAO{
 			return true;
 		}		
 		return false;
-	}		
+	}	
+	//---------------------------------------------------------------------------
+	
 }
