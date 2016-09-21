@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Component
-public class Cart implements Serializable{
+public class CartItem implements Serializable{
 	
 	/**
 	 * 
@@ -18,43 +18,64 @@ public class Cart implements Serializable{
 	private static final long serialVersionUID = 11L;
 
 	@Id
+	private String cartItemId;
+	
 	private String cartId;
 	
 	private String userId;
 	
-	private double grandTotal;
-	
+	private String productId;	
+
 	private int countProducts;
 	
-	public Cart() {
-		this.cartId ="CART"+ UUID.randomUUID().toString().substring(24).toUpperCase();
-	}
+	private double grandTotal;
 	
+	public CartItem() {
+		this.cartItemId ="CARTITEM" +UUID.randomUUID().toString().substring(24).toUpperCase();
+	}
+
 	/* getters/setters for all the fields taken... */
 	
+	public String getCartItemId() {
+		return cartItemId;
+	}
+	public void setCartItemId(String cartItemId) {
+		this.cartItemId = cartItemId;
+	}
+
 	public String getCartId() {
 		return cartId;
 	}
 	public void setCartId(String cartId) {
 		this.cartId = cartId;
 	}
+
 	public String getUserId() {
 		return userId;
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public double getGrandTotal() {
-		return grandTotal;
+
+	public String getProductId() {
+		return productId;
 	}
-	public void setGrandTotal(double grandTotal) {
-		this.grandTotal = grandTotal;
+	public void setProductId(String productId) {
+		this.productId = productId;
 	}
+
 	public int getCountProducts() {
 		return countProducts;
 	}
 	public void setCountProducts(int countProducts) {
 		this.countProducts = countProducts;
+	}
+
+	public double getGrandTotal() {
+		return grandTotal;
+	}
+	public void setGrandTotal(double grandTotal) {
+		this.grandTotal = grandTotal;
 	}
 
 }

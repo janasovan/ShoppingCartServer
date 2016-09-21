@@ -12,5 +12,9 @@ public interface CartDAO {
 	public boolean delete(Cart cart);
 	
 	public Cart getCartByUserId(String userId);
+
+	//public List<Cart> list();
+	
+	//public List<OrderedItems> listOrderedItems(String userId);
 	
 }

@@ -11,23 +11,23 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.niit.shoppingcart.model.Cart;
+import com.niit.shoppingcart.model.CartItem;
 
 @EnableTransactionManagement
-@Repository(value = "cartDAO")
-public class CartDAOImpl implements CartDAO {
+@Repository("cartItemDAO")
+public class CartItemDAOImpl implements CartItemDAO {
 
-	private static final Logger log = LoggerFactory.getLogger(CartDAOImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(CartItemDAOImpl.class);
 	
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public CartDAOImpl(SessionFactory sessionFactory) {
+	public CartItemDAOImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	public CartDAOImpl() {		
+	public CartItemDAOImpl() {
 	}
-
+	
 		/*  getter/setter method for sessionFactory  */
 	
 	public SessionFactory getSessionFactory() {
@@ -40,10 +40,10 @@ public class CartDAOImpl implements CartDAO {
 		// Declare all CRUD Operations...
 	
 	@Transactional
-	public boolean saveOrUpdate(Cart cart) {
+	public boolean saveOrUpdate(CartItem cartItem) {
 		try {
 			log.debug("Starting of saveOrUpdate method...");
-			sessionFactory.getCurrentSession().saveOrUpdate(cart);
+			sessionFactory.getCurrentSession().saveOrUpdate(cartItem);
 			log.debug("Ending of saveOrUpdate method...");
 			return true;
 		} catch (Exception e) {
@@ -52,12 +52,12 @@ public class CartDAOImpl implements CartDAO {
 			return false;
 		}
 	}
-
+	
 	@Transactional
-	public boolean delete(Cart cart) {
+	public boolean delete(CartItem cartItem) {
 		try {
 			log.debug("Starting of delete method...");
-			sessionFactory.getCurrentSession().delete(cart);
+			sessionFactory.getCurrentSession().delete(cartItem);
 			log.debug("Ending of delete method...");
 			return true;
 		} catch (Exception e) {
@@ -66,32 +66,44 @@ public class CartDAOImpl implements CartDAO {
 			return false;
 		}
 	}
-
-	@Transactional
-	public Cart getCartByUserId(String userId) {
-		log.debug("Starting of getCartByUserId method...");
-		String hql = "from Cart where userId=" + "'" + userId + "'";
+	
+	public CartItem get(String cartItemId) {
+		log.debug("Starting of get method...");
+		String hql = "from CartItem where cartItemId=" + "'" + cartItemId + "'";
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		@SuppressWarnings("unchecked")
-		List<Cart> list = query.list();
-		System.out.println("I reached at getCartByUserId method...");
-		if(list == null || list.isEmpty()){
+		List<CartItem> list = query.list();
+		log.debug("Ending of get method...");
+		if(list==null){
 			return null;
 		}
 		else{
 			return list.get(0);
 		}
-	}
+	}	
 	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<CartItem> getCartItemByUserId(String userId) {
+		log.debug("Starting of getCartItemByUserId method...");
+		String hql = "from CartItem where userId=" + "'" + userId + "'";
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		log.debug("Ending of getCartItemByUserId method...");
+		return query.list();
+	}
+
 /*	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Cart> list() {
+	public List<CartItem> list() {
 		log.debug("Starting of list method...");
-		String hql = " from Cart ";
+		String hql = " from CartItem ";
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		log.debug("Ending of list method...");
 		return query.list();
 	}*/
 }
+
+
