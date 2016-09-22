@@ -56,7 +56,6 @@ public class ProductDAOImpl implements ProductDAO{
 			sessionFactory.getCurrentSession().update(product);
 			return true;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
@@ -68,7 +67,6 @@ public class ProductDAOImpl implements ProductDAO{
 			sessionFactory.getCurrentSession().delete(product);
 			return true;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}

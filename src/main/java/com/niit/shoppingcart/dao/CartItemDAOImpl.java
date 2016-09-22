@@ -2,7 +2,9 @@ package com.niit.shoppingcart.dao;
 
 import java.util.List;
 
+
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,7 +59,11 @@ public class CartItemDAOImpl implements CartItemDAO {
 	public boolean delete(CartItem cartItem) {
 		try {
 			log.debug("Starting of delete method...");
-			sessionFactory.getCurrentSession().delete(cartItem);
+			Session session = sessionFactory.openSession();
+			session.delete(cartItem);
+			session.flush();
+			session.close();
+			//sessionFactory.getCurrentSession().delete(cartItem);
 			log.debug("Ending of delete method...");
 			return true;
 		} catch (Exception e) {
@@ -71,9 +77,17 @@ public class CartItemDAOImpl implements CartItemDAO {
 		log.debug("Starting of get method...");
 		String hql = "from CartItem where cartItemId=" + "'" + cartItemId + "'";
 		
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery(hql);
+		
+		
+		
+		//Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		@SuppressWarnings("unchecked")
 		List<CartItem> list = query.list();
+		
+		session.flush();
+		session.close();
 		log.debug("Ending of get method...");
 		if(list==null){
 			return null;
