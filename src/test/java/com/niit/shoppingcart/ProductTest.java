@@ -8,7 +8,6 @@ import com.niit.shoppingcart.model.Product;
 public class ProductTest {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 		@SuppressWarnings("resource")
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();

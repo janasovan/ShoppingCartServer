@@ -127,5 +127,16 @@ public class UserDetailsDAOImpl implements UserDetailsDAO{
 		return false;
 	}	
 	//---------------------------------------------------------------------------
-	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public UserDetails getUserDetailsByName(String name) {
+		String hql = "from userDetails where name = " + "'" + name + "'";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		
+		List<UserDetails> list = query.list();
+		if(list != null && !list.isEmpty()){
+			return list.get(0);
+		}
+		return null;
+	}
 }

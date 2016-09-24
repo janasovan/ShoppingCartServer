@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -15,7 +17,7 @@ import com.niit.shoppingcart.model.Product;
 @Repository(value = "productDAO")		//@Repository annotation is a specialization of the @Component annotation with similar use and functionality...
 public class ProductDAOImpl implements ProductDAO{	
 	
-	//private static final Logger log = LoggerFactory.getLogger(ProductDAOImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(ProductDAOImpl.class);
 	
 	@Autowired		//@Autowired annotation provides more fine-grained control over where and how autowiring should be accomplished..
 					//first we need to create a connection. 

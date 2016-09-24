@@ -1,16 +1,5 @@
 package com.niit.shoppingcart;
 
-import static org.junit.Assert.*;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import com.niit.shoppingcart.dao.UserDetailsDAO;
-import com.niit.shoppingcart.model.UserDetails;
-
-
 public class TestCaseUserDetails {
 
 	/*@Autowired

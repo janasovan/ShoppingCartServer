@@ -11,24 +11,25 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.niit.shoppingcart.model.Cart;
+import com.niit.shoppingcart.model.BillingAddress;
 
 @EnableTransactionManagement
-@Repository(value = "cartDAO")
-public class CartDAOImpl implements CartDAO {
-
-	private static final Logger log = LoggerFactory.getLogger(CartDAOImpl.class);
+@Repository(value="billingAddressDAO")
+public class BillingAddressDAOImpl implements BillingAddressDAO {
 	
+	private static final Logger log = LoggerFactory.getLogger(BillingAddressDAOImpl.class);
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public CartDAOImpl(SessionFactory sessionFactory) {
+	public BillingAddressDAOImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	public CartDAOImpl() {		
+	public BillingAddressDAOImpl(){
+		
 	}
 
-		/*  getter/setter method for sessionFactory  */
+	/*  getter/setter method for sessionFactory  */
 	
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
@@ -37,13 +38,14 @@ public class CartDAOImpl implements CartDAO {
 		this.sessionFactory = sessionFactory;
 	}
 	
-		// Declare all CRUD Operations...
-	
+	// Declare all CRUD Operations...
+
 	@Transactional
-	public boolean saveOrUpdate(Cart cart) {
+	public boolean saveOrUpdate(BillingAddress billingAddress) {
 		try {
 			log.debug("Starting of saveOrUpdate method...");
-			sessionFactory.getCurrentSession().saveOrUpdate(cart);
+			System.out.println("i am here");
+			sessionFactory.getCurrentSession().saveOrUpdate(billingAddress);
 			log.debug("Ending of saveOrUpdate method...");
 			return true;
 		} catch (Exception e) {
@@ -54,44 +56,32 @@ public class CartDAOImpl implements CartDAO {
 	}
 
 	@Transactional
-	public boolean delete(Cart cart) {
+	public boolean delete(BillingAddress billingAddress) {
 		try {
 			log.debug("Starting of delete method...");
-			sessionFactory.getCurrentSession().delete(cart);
+			sessionFactory.getCurrentSession().delete(billingAddress);
 			log.debug("Ending of delete method...");
 			return true;
 		} catch (Exception e) {
 			log.error("Error occured : " + e.getMessage());
 			e.printStackTrace();
 			return false;
-		}
+		}	
 	}
 
 	@Transactional
-	public Cart getCartByUserId(String userId) {
-		log.debug("Starting of getCartByUserId method...");
-		String hql = "from Cart where userId=" + "'" + userId + "'";
-		
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+	public BillingAddress get(String billingAddressId) {		
+		String hql="from billingaddress where id = " + "'" + "billingid" + "'";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);		
 		@SuppressWarnings("unchecked")
-		List<Cart> list = query.list();
-		//System.out.println("I reached at getCartByUserId method...");
-		if(list == null || list.isEmpty()){
+		List<BillingAddress> list = query.list();		
+		if (list == null) {
 			return null;
-		}
-		else{
+		} else {
 			return list.get(0);
-		}
-	}
-	
-/*	@SuppressWarnings("unchecked")
-	@Transactional
-	public List<Cart> list() {
-		log.debug("Starting of list method...");
-		String hql = " from Cart ";
+		}	
 		
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		log.debug("Ending of list method...");
-		return query.list();
-	}*/
+		//return sessionFactory.getCurrentSession().get(BillingAddress.class, billingAddressId);
+	}
+
 }

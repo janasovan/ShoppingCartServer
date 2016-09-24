@@ -25,5 +25,7 @@ public interface UserDetailsDAO {		//DAO - Data Access Object...
 	
 	public boolean isValidUser(String id, String password);
 	
+	public UserDetails getUserDetailsByName(String name);
+	
 	
 }
