@@ -1,8 +1,17 @@
 package com.niit.shoppingcart;
 
+import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.niit.shoppingcart.dao.UserDetailsDAO;
+import com.niit.shoppingcart.model.UserDetails;
+
 public class TestCaseUserDetails {
 
-	/*@Autowired
+	@Autowired
 	UserDetailsDAO userDetailsDAO;			//instance of UserDetailsDAO created...
 	
 	@Autowired
@@ -42,7 +51,7 @@ public class TestCaseUserDetails {
 		userDetails.setEmail("user002@niit.com");
 		userDetails.setPhone("1234014321");
 		userDetails.setAddress("Hydrabad");
-		userDetails.setAdmin(false);
+		//userDetails.setAdmin(false);
 		
 		
 		//boolean flag = userDetailsDAO.save(userDetails);
@@ -70,9 +79,17 @@ public class TestCaseUserDetails {
 		//userDetails = userDetailsDAO.get("USER001");
 		//assertEquals("USER_name_001", userDetails.getName());		//instead of using these three lines we can use just a single line as follows...
 		
-	//	assertEquals(userDetailsDAO.get("USER001").getName(), "USER_name_001");
+		assertEquals(userDetailsDAO.get("sovanjana").getId(), "sovanjana");
 		
 		System.out.println("Perfect Match...");
-	}*/
+	}
+	
+	//@Test
+	public void getUserDetailsByNameTestCase(){
+		assertEquals(userDetailsDAO.getUserDetailsByName("admin").getName(), "admin");
+	}
+	
+	
+	
 	
 }

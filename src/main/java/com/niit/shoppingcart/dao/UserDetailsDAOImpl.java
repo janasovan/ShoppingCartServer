@@ -88,6 +88,19 @@ public class UserDetailsDAOImpl implements UserDetailsDAO{
 			return list.get(0);
 		}		
 	}
+	//---------------------------------------------------------------------------
+		@Transactional
+		public UserDetails getUserDetailsByName(String name) {
+			String hql = " from UserDetails where name = " + "'" + name + "'";	//select * from UserDetails where name = '___'
+			Query query = sessionFactory.getCurrentSession().createQuery(hql);
+			
+			@SuppressWarnings("unchecked")
+			List<UserDetails> list = query.list();
+			if(list == null || list.size()==0){
+				return null;
+			}
+			return list.get(0);
+		}
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
@@ -126,17 +139,5 @@ public class UserDetailsDAOImpl implements UserDetailsDAO{
 		}		
 		return false;
 	}	
-	//---------------------------------------------------------------------------
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public UserDetails getUserDetailsByName(String name) {
-		String hql = "from userDetails where name = " + "'" + name + "'";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		
-		List<UserDetails> list = query.list();
-		if(list != null && !list.isEmpty()){
-			return list.get(0);
-		}
-		return null;
-	}
+	
 }

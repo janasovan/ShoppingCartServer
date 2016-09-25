@@ -53,9 +53,9 @@ public class BillingAddress implements Serializable{
 		return billingAddressId;
 	}
 
-	/*public void setBillingAddressId(String billingAddressId) {
+	public void setBillingAddressId(String billingAddressId) {
 		this.billingAddressId = billingAddressId;
-	}*/
+	}
 
 	public String getUserId() {
 		return userId;
